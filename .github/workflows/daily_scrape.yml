@@ -1,40 +1,33 @@
 name: Daily News Scraper
 
-# Trigger: Run automatically at 6:00 AM UTC daily, OR when we push code
 on:
   schedule:
-    - cron: '0 6 * * *'  # 6:00 AM UTC (approx 8:00 AM SAST)
-  workflow_dispatch:      # Allows you to click a "Run Now" button manually
+    - cron: '0 6 * * *'
+  workflow_dispatch:
 
 permissions:
-  contents: write         # Crucial: Allows the robot to commit changes back to the repo
+  contents: write
 
 jobs:
   scrape-and-commit:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Get the latest code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Install Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      # 3. Install dependencies
       - name: Install libraries
         run: |
-          pip install -r requirements.txt
+          pip install requests beautifulsoup4 pandas
 
-      # 4. Run the Pipeline
       - name: Run Scraper
         run: python main.py
 
-      # 5. Save the Data (Git Scraping)
-      # This commits the updated 'news.db' back to the repo so data persists.
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
