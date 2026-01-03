@@ -6,7 +6,6 @@ import sqlite3
 import os
 from datetime import datetime
 
-from matplotlib.artist import get
 
 #Defining the path to the database file
 #We use os.path to ensure it works on both Windows and Mac/Linux automatically
