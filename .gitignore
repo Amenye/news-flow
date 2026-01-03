@@ -1,0 +1,17 @@
+# .gitignore
+
+# Python compilation garbage
+__pycache__/
+*.py[cod]
+
+# Virtual Environment (Very important to ignore)
+venv/
+env/
+.env
+
+# Database (We don't commit the live data)
+*.db
+*.sqlite3
+
+# OS generated files
+.DS_Store
